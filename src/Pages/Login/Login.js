@@ -25,6 +25,7 @@ const Login = ({navigation}) => {
         formValues.usermail,
         formValues.password,
       );
+      navigation.navigate('Rooms');
     } catch (error) {
       showMessage({
         message: authErrorMessages(error.code),
