@@ -72,7 +72,8 @@ const stackOptionsRoom = () => ({
     backgroundColor: '#eeeeee',
   },
 });
-const stackOptionsMessage = () => ({
+const stackOptionsMessage = ({route}) => ({
+  title: route.params.item.roomName,
   headerStyle: {
     backgroundColor: '#eeeeee',
   },
