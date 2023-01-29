@@ -4,11 +4,13 @@ import styles from './RoomCard.style';
 
 function RoomCard({rooms, onPress}) {
   return (
-    <TouchableWithoutFeedback onPress={onPress}>
-      <View style={styles.container}>
-        <Text style={styles.room_name}>{rooms.roomName}</Text>
-      </View>
-    </TouchableWithoutFeedback>
+    <View>
+      <TouchableWithoutFeedback onPress={onPress}>
+        <View style={styles.container}>
+          <Text style={styles.room_name}>{rooms.roomName}</Text>
+        </View>
+      </TouchableWithoutFeedback>
+    </View>
   );
 }
 export default RoomCard;

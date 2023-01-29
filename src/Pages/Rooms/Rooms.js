@@ -1,15 +1,15 @@
 import React, {useState, useEffect} from 'react';
-import {View, FlatList, Text} from 'react-native';
-import FloatingButton from '../../components/FloatingButton';
-import RoomModal from '../../components/modal/RoomModal';
+import {View, FlatList} from 'react-native';
 import {showMessage} from 'react-native-flash-message';
 import database from '@react-native-firebase/database';
+
+import FloatingButton from '../../components/FloatingButton';
+import RoomModal from '../../components/modal/RoomModal';
 import parseContentData from '../../utils/parseContentData';
 import RoomCard from '../../components/cards/RoomCard/RoomCard';
-import auth from '@react-native-firebase/auth';
 import styles from './Rooms.style';
 
-const Rooms = () => {
+const Rooms = ({navigation}) => {
   const [roomNameVisible, setRoomNameVisible] = useState(false);
   const [roomList, setRoomList] = useState([]);
 
@@ -44,10 +44,19 @@ const Rooms = () => {
     database().ref('rooms/').push(contentObject);
   };
 
-  const renderRoomList = ({item}) => <RoomCard rooms={item} />;
+  const handleRoomToMessage = item => {
+    navigation.navigate('Messages', {item});
+  };
+
+  const renderRoomList = ({item}) => (
+    <RoomCard onPress={() => handleRoomToMessage(item)} rooms={item} />
+  );
+
   return (
     <View style={styles.container}>
-      <FlatList data={roomList} renderItem={renderRoomList} />
+      <View>
+        <FlatList data={roomList} renderItem={renderRoomList} />
+      </View>
       <FloatingButton icon="plus" onPress={handleRoomModalToggle} />
       <RoomModal
         visible={roomNameVisible}
